@@ -1,0 +1,28 @@
+{% load static %}
+{% include 'user_registration/base.html' %}
+{% block body %}
+
+{% include "includes/error.html" %}
+<div class="add-question">
+    <h1 class="title">Add Quiz Questions</h1>
+    <form id="question-form" action="" method="POST">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Add">
+        <a href="{% url 'quiz:show_quiz_question' %}">Show Questions</a>
+    </form>
+   
+</div>
+
+{% endblock  %}
+
+
+
+
+
+
+
+
+
+
+

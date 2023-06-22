@@ -1,0 +1,18 @@
+{% extends 'user_registration/base.html' %}
+{% load static %}
+{% block description %}Sign up for a new account on quiz application{% endblock%}
+    {% block robots %}register, follow {% endblock %}
+    {% block keywords %}Signup, Quiz Application{% endblock %}
+    {% block title %}Signup{% endblock %}
+    {% block body %}
+
+    <h1 class="title">Please fill the form and Register</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ info_form.as_p }}
+
+        <input type="submit" value="Register">
+    </form>
+    
+{% endblock %}

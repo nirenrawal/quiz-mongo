@@ -1,0 +1,73 @@
+{% include 'user_registration/base.html' %}
+{% load static %}
+
+
+{% block body %}
+<div class='quiz-view'>
+<h1>Category: {{ category.name }}</h1>
+<p>Description: {{ category.description }}</p>
+
+<p id='timer'></p>
+</div>
+<form method="POST" action="{% url 'quiz:submit_quiz' category_id=category.id %}">
+    {% csrf_token %}
+    {% for question in questions %}
+        <h3>{{ question.content }}</h3>
+        {% for answer in question.get_answers %}
+            <input type="radio" id="{{ answer.id }}" name="question_{{ question.id }}" value="{{ answer.id }}">
+            <label for="{{ answer.id }}">{{ answer.content }}</label><br>
+        {% endfor %}
+        <br>
+    {% endfor %}
+    <input type="submit" value="Submit">
+</form>
+
+
+
+<script>
+   
+    function handleQuizSubmission(categoryId, userScoreId, duration) {
+      const timerElement = document.getElementById("timer");
+      let timeRemaining = duration;
+    
+      function updateTimer() {
+        const minutes = Math.floor(timeRemaining / 600);
+        const seconds = timeRemaining % 60;
+        timerElement.textContent = `Time Remaining: ${minutes}:${seconds
+          .toString()
+          .padStart(2, "0")}`;
+    
+        if (timeRemaining <= 0) {
+          alert("Time's up!");
+          submitQuiz();
+        } else {
+          timeRemaining--;
+          setTimeout(updateTimer, 1000);
+        }
+      }
+      function submitQuiz() {
+        const form = document.getElementById("quiz-form");
+        form.submit();
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        updateTimer();
+      });
+    }
+ 
+    const categoryId = {{ category.id }};
+    const userScoreId = {{ user_score_id }};
+    const duration = {{ category.time }};
+    
+
+    document.addEventListener("DOMContentLoaded", function () {
+      handleQuizSubmission(categoryId, userScoreId, duration);
+    });
+  </script>
+  
+  
+  
+  
+  
+  
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'user_registration/base.html' %}
+{% load static %}
+    {% block description %}Index page quiz application{% endblock%}
+    {% block robots %}index, follow {% endblock %}
+    {% block keywords %}Home, Quiz Application{% endblock %}
+    {% block title %}Home{% endblock %}
+    {% block body %}
+   
+<section class='index-page'>
+    
+    <div class="welcome-section">
+        <h1 class="title">Welcome {{ user.first_name | capfirst}} to Quiz Application!</h1>
+        <h3>You can make your own tests that you can play with your loved ones. By taking this quiz, you can prove that you're the smartest person on the planet.</h3>
+    <div class="index-buttons">
+        <a href="{% url 'user_registration:register' %}"><button class="sm-button">Signup</button></a>
+        <a href="{% url 'user_registration:user_login' %}"><button class="sm-button">Login</button></a>
+        
+    </div>
+    
+    </div>
+
+    <div class='index-images'>
+        <div class="item a">
+            <img src="{% static "image/quiz.png" %}" alt="quiz">
+        </div>
+        <div class="item b">
+            <img src="{% static "image/bulb.png" %}" alt="myshop logo">
+        </div> 
+        <div class="item c">
+            <img src="{% static "image/girl-with-computer.jpeg" %}" alt="myshop logo">
+        </div>
+        <div class="item d">
+            <img src="{% static "image/kids-with-computer.jpeg" %}" alt="myshop logo">
+        </div>
+        <div class="item e">
+            <img src="{% static "image/quiztime.jpeg" %}" alt="quiztime">
+        </div>
+    </div>
+    
+</section>
+{% endblock body %}

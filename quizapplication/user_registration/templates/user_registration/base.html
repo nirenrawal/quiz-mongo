@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description%}{% endblock %}">
+    <meta name="robots" content="{% block robots%}{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}{% endblock %}">
+    <link rel="stylesheet" href="{% static 'user_registration/style.css'%}">
+    <link rel="icon" type="image/x-icon" href="{% static "image/question.ico" %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+
+<!-- fontawsome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav class="navbar" id="my-main-nav">
+        
+        <a href="{% url 'user_registration:index' %}"><img src="{% static "image/logo-no-background.svg" %}" width="50" alt="logo"></a>
+       
+        
+         <ul class="nav-links">
+ 
+          
+           <input type="checkbox" id="checkbox-toggle">
+           <label for="checkbox-toggle" class="hamburger">&#9776;</label>
+        
+         
+         <div class="menu">
+            {% if user.is_authenticated %}
+           <li><a href="{% url 'quiz:quiz_index' %}" >Quiz Home</a></li>
+           <li><a href="{% url 'user_registration:user_profile' user.id %}">Profile</a></li>
+           <li class="dropdown-menu">
+            <a href="#">Quiz <i class="fa fa-sort-down"></i> </a>
+
+            <ul class="dropdown">
+              <li><a class='dropdown-link' href="{% url 'quiz:create_quiz_category' %}">Create Category</a></li>
+              <li><a class='dropdown-link' href="{% url 'quiz:add_quiz_question' %}">Add Questions</a></li>
+              <li><a class='dropdown-link' href="{% url 'quiz:show_quiz_category' %}">Show Quiz Category</a></li>
+              <li><a class='dropdown-link' href="{% url 'quiz:show_quiz_question' %}">Show Quiz Question</a></li>
+              <li><a class='dropdown-link' href="{% url 'user_registration:user_list' %}">Show User List</a></li>
+            </ul>
+          </li>
+           <li><a href="{% url 'user_registration:user_logout' %}">Logout</a></li>
+           <li><a href="{% url 'user_registration:change_password' user.id %}">Change Password</a></li>
+ 
+           
+           {% else %}
+           <li><a href="{% url 'user_registration:index' %}" >Home</a></li>
+           <li><a href="{% url 'user_registration:register' %}">Signup</a></li>
+           <li><a href="{% url 'user_registration:user_login' %}">Login</a></li>
+           {% endif %}
+           <div class="dark-mode">
+            <svg onclick="darkMode()" viewBox="0 0 512 512" width="25px" id="sun-icon">
+              <g id="Sun">
+                  <path d="M255.8,120a136,136,0,1,0,136,136.05v0A136.17,136.17,0,0,0,255.8,120Z" style="fill:#1e1e1e"/>
+                  <path d="M472,232H440a24,24,0,0,0,0,48h32a24,24,0,0,0,0-48Z" style="fill:#1e1e1e"/>
+                  <path d="M255.8,416a24,24,0,0,0-24,24v32a24,24,0,1,0,48,0V440A24,24,0,0,0,255.8,416Z" style="fill:#1e1e1e"/>
+                  <path d="M96,256.05a24,24,0,0,0-24-24H40a24,24,0,1,0,0,48H72A24,24,0,0,0,96,256.05Z" style="fill:#1e1e1e"/>
+                  <path d="M255.8,96a24,24,0,0,0,24-24V40a24,24,0,0,0-48,0V72a24,24,0,0,0,24,24Z" style="fill:#1e1e1e"/>
+                  <path d="M402.89,142.87l22.63-22.63a24,24,0,0,0-33.85-34l-.07.07L369,109a24,24,0,0,0,33.86,34Z" style="fill:#1e1e1e"/>
+                  <path d="M402.89,369.22a24,24,0,0,0-34,33.87l.06.05,22.63,22.63a24,24,0,0,0,34-33.86l-.06-.06Z" style="fill:#1e1e1e"/>
+                  <path d="M108.7,369.22,86.07,391.85a24,24,0,1,0,33.85,34l.07-.07,22.63-22.63a24,24,0,1,0-33.86-34Z" style="fill:#1e1e1e"/>
+                  <path d="M108.7,142.87a24,24,0,1,0,34-33.89l0,0L120,86.32a24,24,0,1,0-34,33.83l.09.09Z" style="fill:#1e1e1e"/>
+              </g>
+          </svg>
+          
+            <svg onclick="lightMode()" viewBox="0 0 312.81 311.51" width="20px" id="moon-icon">
+              <path d="M305.2,178.16a11,11,0,0,0-9.2,2A117.36,117.36,0,0,1,260.4,201a111.48,111.48,0,0,1-40.4,7.2A117.45,117.45,0,0,1,102.4,90.56a123.27,123.27,0,0,1,6.4-38.8A107.41,107.41,0,0,1,128,17.36,10.21,10.21,0,0,0,126.4,3a11,11,0,0,0-9.2-2,161.41,161.41,0,0,0-84.8,56.8,158.38,158.38,0,1,0,280,132.8A9.71,9.71,0,0,0,305.2,178.16Z" transform="translate(0 -0.65)" style="fill:#1e1e1e"/>
+          </svg>
+           </div>
+           
+         
+         </div>
+       </ul> 
+         </nav>
+    
+    {% block body %}{% endblock %}
+    <script src="{% static 'user_registration/index.js' %}"></script>
+</body>
+</html>

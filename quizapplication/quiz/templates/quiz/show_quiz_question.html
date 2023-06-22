@@ -1,0 +1,54 @@
+{% include 'user_registration/base.html' %}
+{% load static %}
+
+{% block body %}
+{% include "includes/error.html" %}
+
+
+    <h1 class="title">Quiz Questions</h1>
+    <a class='back-button' href="{% url 'quiz:add_quiz_question' %}">Back</a>
+    <table class="quiz-question-view">
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Category</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for question in questions %}
+            <tr>
+               <td><a href="{% url 'quiz:add_answer_to_questions' question.id %}">{{ question.id }} - {{ question.content }}</a> </td>
+                <td style="text-align:center;">{{ question.quiz_category }}</td>
+                <td style="text-align:center;">
+                    <form style="
+                        margin:auto;
+                        width: 40px;
+                        background-color: none;
+                        border: none;
+                        border-radius: none;
+                        color: none;
+                        padding: 0 0 0 0;
+                        margin: 0 0 0 0;
+                    " method="POST" action="{% url 'quiz:delete_quiz_question' question.id %}">
+                        {% csrf_token %}
+                        <button class="del-button" type="submit">Delete</button>
+                    </form>
+                </td>
+                    
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No questions added yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+  
+    {% endblock  %}
+
+
+
+
+

@@ -1,0 +1,21 @@
+{% include 'user_registration/base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="result">
+<div class="quiz-result">
+<h1>Quiz Result</h1>
+<h2>Category: {{ category.name }}</h2>
+<br>
+<p>Thank you {{user.first_name}} for playing the quiz, your scores are below:</p>
+<br>
+<p>Total Questions: {{ total_questions }}</p>
+<p>Your Score: {{ user_score.score }}</p>
+<p>Percentage: {{ percentage }}%</p>
+
+
+</div>
+</div>
+{% endblock %}
+
+

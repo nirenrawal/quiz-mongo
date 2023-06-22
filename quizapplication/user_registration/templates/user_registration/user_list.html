@@ -1,0 +1,52 @@
+
+
+{% extends "user_registration/base.html" %}
+{% load static %}
+
+{% block title %}User List{% endblock %}
+
+{% block body %}
+<section class="user-card-container">
+  <h1 class='title'>Users</h1>
+  <div class="user-card">
+    {% for user in users %}
+    <div class="user-card-profile">
+      <img class="card-image" src="{{ user.userinfo.profile_image.url }}" alt="Profile Image" width="100" height="100">
+      <p>{{ user.username }}</p>
+      <a href="#"><button class="link-button" data-modal-id="modal-container{{ forloop.counter }}">See Profile</button></a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% for user in users %}
+<div class="modal-container" id="modal-container{{ forloop.counter }}">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>{{ user.first_name|capfirst }}'s Profile</h2>
+      <i class="fa fa-close" id="close-icon{{ forloop.counter }}"></i>
+    </div>
+    <div class="modal-content">
+      <img src="{{ user.userinfo.profile_image.url }}" alt="Profile Image">
+      <p>
+        Name: {{ user.first_name }} {{ user.last_name }}
+      </p>
+      <p>
+        Email: {{ user.email }}
+      </p>
+      <p>
+        Address: {{ user.userinfo.address }}
+      </p>
+      <p>
+        Phone: {{ user.userinfo.phone }}
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn-close" id="close-btn{{ forloop.counter }}">Close</button>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+{% endblock %}

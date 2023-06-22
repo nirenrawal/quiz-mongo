@@ -1,0 +1,47 @@
+{% extends 'user_registration/base.html' %} 
+{% load static %} 
+{% block description %}User Profile Quiz Application{% endblock%} 
+{% block robots %}Profile, follow {% endblock %} 
+{% block keywords %}Profile, Quiz Application{% endblock %} 
+{% block title %}User Profile{% endblock %} 
+
+{% block body %}
+
+{% include "includes/error.html" %}
+
+<div class="profile-page">
+  <div class="flex-item">
+    <div class="user-profile">
+      <h1 class="title">User Profile</h1>
+      <p><strong>Username:</strong> @<em>{{ user.username }}</em></p>
+      <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Address:</strong> {{ user_info.address }}</p>
+      <p><strong>Phone:</strong> {{ user_info.phone }}</p>
+      {% if user_info.profile_image %}
+      <img
+        width="200"
+        src="{{ user_info.profile_image.url }}"
+        alt="{{ user_info.user.get_full_name }} Profile Image"
+      />
+      {% else %}
+      <img
+        width="200"
+        src="{% static 'image/no-image.svg' %}"
+        alt="Add Image"
+      />
+      {% endif %}
+      <p>
+        <a class='link-button' href="{% url 'user_registration:upload_profile_image' user.id %}"
+          >Change Image</a
+        >
+      </p>
+      <p>
+        <a class='link-button' href="{% url 'user_registration:update_profile' user.id %}"
+          >Update Profile</a
+        >
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

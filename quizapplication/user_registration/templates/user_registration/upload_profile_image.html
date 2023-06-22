@@ -1,0 +1,16 @@
+{% extends 'user_registration/base.html' %}
+{% load static %}
+    {% block title %}Upload Image{% endblock  %}
+{% block body %}
+
+
+  <h1 class="title">Upload Profile Image</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="upload-image">
+      <label for="id_profile_image">Profile Image:</label>
+      <input type="file" name="profile_image" id="id_profile_image">
+      <button>Upload</button>
+    </div>
+  </form>
+{% endblock %}

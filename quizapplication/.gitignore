@@ -1,0 +1,15 @@
+#Env
+env/
+venv/
+
+.env
+db.sqlite3
+media/
+.DS_Store
+../.DS_Store
+quiz/__pycache__/
+quiz/migrations/__pycache__/
+quiz/migrations/
+quizapplication/__pycache__/
+user_registration/__pycache__/
+user_registration/migrations/__pycache__/

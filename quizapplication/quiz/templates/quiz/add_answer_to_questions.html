@@ -1,0 +1,41 @@
+{% include 'user_registration/base.html' %} 
+{% load static %}
+<style>
+    input {
+        margin-bottom: 15px;
+        text-align:center;
+    }
+   input["checkbox"]{
+    margint-bottom:20px;
+   }
+   p {
+    text-align: center;
+   }
+   .back-button {
+    margin: 10px auto;
+   }
+</style>
+
+{% block body %}
+
+{% include "includes/error.html" %}
+
+<h1 class="title">Add Answers To the Questions</h1>
+
+<form action="">
+    <a class='back-button' href="{% url 'quiz:show_quiz_question' %}">Back</a>
+    <p> <strong>Question: </strong> {{question.content}}</p>
+    <p><strong>Category: </strong>{{question.quiz_category}}</p>
+</form>
+
+<form action="{% url 'quiz:add_answer_to_questions' question.id %}" method="POST">
+    <p style='text-align:center;'>Add your answers here.</p>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add">
+    
+</form>
+
+
+
+{% endblock %}

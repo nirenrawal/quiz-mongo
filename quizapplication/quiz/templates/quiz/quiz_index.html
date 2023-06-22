@@ -1,0 +1,42 @@
+{% include 'user_registration/base.html' %} 
+{% load static %}
+
+{% block body %}
+
+{% include "includes/error.html" %}
+{% load custom_filters %}
+
+<section class="index-page">
+  
+  <div class="welcome-section">
+    <h1 class="title">
+      Welcome {{ user.first_name | capfirst}} to Quiz Application!
+    </h1>
+    <h3>Play Online Quiz And Have Fun With Your Family & Friends</h3>
+    {% comment %} <input class type="text" placeholder="@User name" /> {% endcomment %}
+    <a href="{% url 'user_registration:user_list' %}"><button class="sm-button">See User List</button></a>
+  </div>
+
+  
+<div class="card-box" style="display:flex; flex-wrap:wrap;justify-content:space-between; flex-basis: calc(33.33% - 10px);">
+
+  {% for category in quiz_categories %}
+  
+  <div class="play-quiz">
+    <div class="card-2">
+      <h3>{{ category.name }}</h3>
+      <p>{{ category|mongo_id }}</p>
+     
+    <a style="text-decoration: none; color:black; font-weight:900" href="{% url 'quiz:view_quiz' category|mongo_id %}"><input style="width:100px; font-size:12px;" type="submit" value="Play Quiz"></a>
+
+  
+    </div>
+  </div>
+
+{% endfor %}
+
+</div>
+  
+  
+</section>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% include 'user_registration/base.html' %}
+{% load static %}
+
+{% block body %}
+{% include "includes/error.html" %}
+
+  
+    <h1 class="title">Quiz Categories</h1>
+    <a class='back-button' href="{% url 'quiz:quiz_index' %}">Home</a>
+    <table class="quiz-question-view">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>No. of Ques.</th>
+                <th>Time in Sec.</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for quiz_category in quiz_categories %}
+            <tr>
+                <td>{{ quiz_category.name }}</td>
+                <td>{{ quiz_category.description }}</td>
+                <td style="text-align:center;">{{ quiz_category.number_of_questions }}</td>
+                <td style="text-align:center;"> {{ quiz_category.time }}</td>
+                <td style="text-align:center; width:100px">
+                    
+                    <form style="
+                        width: 40px;
+                        background-color: none;
+                        border: none;
+                        border-radius: none;
+                        color: none;
+                        padding: 0 0 0 0;
+                        margin: 0 0 0 0;
+                    " method="POST" action="{% url 'quiz:update_quiz_category' quiz_category.id %}">
+                        {% csrf_token %}
+                        <button style="background-color:green;" class="del-button" type="submit">Update</button>
+                    </form> <br>
+                    <form style="
+                    width: 40px;
+                    background-color: none;
+                    border: none;
+                    border-radius: none;
+                    color: none;
+                    padding: 0 0 0 0;
+                    margin: 0 0 0 0;
+                " method="POST" action="{% url 'quiz:delete_quiz_category' quiz_category.id %}">
+                    {% csrf_token %}
+                    <button style="background-color:red;" class="del-button" type="submit">Delete</button>
+                </form>
+                </td>
+                    
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No questions added yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+  
+    {% endblock  %}
+
+
+
+
+
